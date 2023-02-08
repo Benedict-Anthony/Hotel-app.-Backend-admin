@@ -1,0 +1,8 @@
+run the following commanind in your terminal
+Note: python must be installed. preferably python 3.6 and up
+
+step 1 --- python -m ==== this will create a virtual enviroments for you
+step 2 --- env\scripts\activate === activate a virtual enviroments
+step 3 --- pip install -r requirements.txt === install all the dependencies
+setp 4 python manage.py createsuperuser === create your login details 
+step 5 python manage.py runserver === run the local dev server on 127:0.0.0:8000.
