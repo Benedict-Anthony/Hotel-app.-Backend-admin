@@ -28,4 +28,4 @@ this is the login end point which accept a post request and return an access tok
 
 NOTE: the grant_type, client_id and the client_secret should be left like that. the only thing to be provided by user aree thier email and password
 
-bellow is an example ["auth sample"]("./auth.JPG")
+bellow is an example ["auth sample"](./auth.JPG)
