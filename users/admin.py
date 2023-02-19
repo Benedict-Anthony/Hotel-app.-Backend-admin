@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser
+from .models import CustomUser, BankDetails, HouseAgent
 
 admin.site.site_header ="Hotel App Administration"
 admin.site.site_title  =  "Hostel admin"
@@ -10,3 +10,5 @@ class CustomerUserAmin(admin.ModelAdmin):
     list_filter = ("last_name", "last_name")
     
 admin.site.register(CustomUser, CustomerUserAmin)
+admin.site.register(BankDetails)
+admin.site.register(HouseAgent)

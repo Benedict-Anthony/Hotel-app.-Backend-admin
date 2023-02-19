@@ -12,11 +12,11 @@ this url point to the admin dasboard where activities and data of the backend ca
 
 This endpoint accept a post request for creating users.
 
-## auth endpoint  =====>> <http://127.0.0.1:8000/api/auth/>
+## auth endpoint  =====>> </api/auth/>
 
 This is the base endpoint for user authentication
 
-## login endpoint  =====>> <http://127.0.0.1:8000/api/auth/token/>
+## login endpoint  =====>> </api/auth/token/>
 
 this is the login end point which accept a post request and return an access token, expiring time and other data. To login, the email feed is required but it's denoted as username. viz the structure goes like this...
 
@@ -29,3 +29,20 @@ this is the login end point which accept a post request and return an access tok
 NOTE: the grant_type, client_id and the client_secret should be left like that. the only thing to be provided by user aree thier email and password
 
 bellow is an example !["auth sample"](./auth.JPG)
+
+
+## /api/accommodation/
+
+list of all the acccomodation
+
+## /api/accommodation/mutate
+
+accept POST REQUEST
+
+## /api/accommodation/ID
+
+accept put, delete request
+
+## /api/accommodation/categories
+
+list all the categories 

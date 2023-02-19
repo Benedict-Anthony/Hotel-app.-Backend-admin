@@ -20,11 +20,3 @@ class UserCreationView(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
 
-# def decode_token():
-#     print(settings.SECRET_KEY)
-#     try:
-#         token = jwt.decode("hwRomSyWWqjvVjQ9uF9pcWh2pm32Ox", settings.SECRET_KEY, algorithms=["HS256"])
-#         print(token)
-#     except Exception as exec:
-#         print(exec)
-        
