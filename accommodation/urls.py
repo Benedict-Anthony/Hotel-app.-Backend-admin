@@ -1,13 +1,24 @@
 from django.urls import path
 
-from .views import AccommodationMutateView, AccommodationListView, CategoryListView
+from .views import AccommodatioFilterView, AccommodationMutateView, AccommodationListView, CategoryListView, LocationListView
 
 urlpatterns = [
-    path("mutate/", AccommodationMutateView.as_view()),
+    # UNAUTHENTICATED VIEWS
     path("", AccommodationListView.as_view(), name="accommodation-list"),
-    path("categories/", CategoryListView.as_view(), ),
+    path("detail/<slug:slug>/", AccommodationListView.as_view(), name="accommodation-detail"),
     
-    path("<slug:slug>/", AccommodationListView.as_view()),
+    # FILTER VIEWS
+    path("search/<str:params>/", AccommodatioFilterView.as_view(), name="accommodation-search"),
+    path("filter/categories/<str:category>/", AccommodatioFilterView.as_view(), name="accommodation-category-filter"),
+    path("filter/locations/<str:location>/", AccommodatioFilterView.as_view(), name="accommodation-location-filter"),
+    path("filter/categories/<str:category>/locations/<str:location>/", AccommodatioFilterView.as_view(), name="accommodation-category-location-filter"),
     
-    path("mutate/<str:id>/", AccommodationMutateView.as_view(), ),
+    # CATEGORIES AND LOCATIONS LIST VIEWS
+    path("categories/", CategoryListView.as_view(),name="category-list" ),
+    path("locations/", LocationListView.as_view(),name="location-list" ),
+    
+    
+    #AUTHENTICATION REQUIRED |  CRUD VIEWS
+    path("mutate/", AccommodationMutateView.as_view()),
+    path("mutate/<str:slug>/", AccommodationMutateView.as_view(), ),
 ]

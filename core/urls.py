@@ -20,12 +20,31 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('api/auth/', include('drf_social_oauth2.urls', namespace='drf')),
     
-    path("api/", include("users.urls")),
-    path("api/accommodations/", include("accommodation.urls"))
+    
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
+    
+    path("api/v1/", include("users.urls")),
+    path("api/v1/accommodations/", include("accommodation.urls")),
+    
+    
+     # YOUR PATTERNS
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/v1/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='documation'),
+    path('api/v1/readocs/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
+
+# 8FfpY3mJ40soMgaJP5t1jPy1z1BoyK

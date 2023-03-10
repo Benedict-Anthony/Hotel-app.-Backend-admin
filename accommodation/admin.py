@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import AccommodationImages, AccommodationSpace, AccommodationCategory, Location
+from .models import Images, Accommodation, Category, Location
 
 
-admin.site.register(AccommodationImages)
-admin.site.register(AccommodationSpace)
-admin.site.register(AccommodationCategory)
+admin.site.register(Images)
+admin.site.register(Accommodation)
+admin.site.register(Category)
 admin.site.register(Location)

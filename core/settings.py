@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 import os
 import dj_database_url
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+@@+-4cgy4125$*v4s=#dz#u0*%15s*8qbf&&%qo0kja8!88f1'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,10 +46,9 @@ INSTALLED_APPS = [
     # PACKAGES
     "rest_framework",
     "corsheaders",
-    'oauth2_provider',
-    'social_django',
-    'drf_social_oauth2',
-    
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
+    'rest_framework_simplejwt',
     
     # APPS
     "users.apps.UsersConfig",
@@ -126,26 +126,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 
-
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'oauth2_provider.ext.rest_framework.OAuth2Authentication',  # django-oauth-toolkit < 1.0.0
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
-        'drf_social_oauth2.authentication.SocialAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 AUTHENTICATION_BACKENDS = (
     
-     # Facebook OAuth2
-    'social_core.backends.facebook.FacebookAppOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
-    
-    # Google OAuth2
-    'social_core.backends.google.GoogleOAuth2',
-
-   'drf_social_oauth2.backends.DjangoOAuth2',
+  
    'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -180,6 +175,44 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
 ]
+
+SPECTACULAR_SETTINGS = {
+    # 'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    # 'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    # 'REDOC_DIST': 'SIDECAR',
+    'TITLE': 'HOSTEL APP API DOCS',
+    'DESCRIPTION': 'This is the document tation for hostel accomodation app with verious features',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
+
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=100),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=115),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": False,
+    "UPDATE_LAST_LOGIN": False,
+
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY":SECRET_KEY,
+    "VERIFYING_KEY": "",
+    "AUDIENCE": None,
+    "ISSUER": None,
+    "JSON_ENCODER": None,
+    "JWK_URL": None,
+    "LEEWAY": 0,
+
+    "AUTH_HEADER_TYPES": ("Bearer", "JWT",),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
+
+}
+
 
 
 # Internationalization
