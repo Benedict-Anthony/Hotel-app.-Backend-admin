@@ -20,7 +20,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = [
-            "name",
+           "id", "name",
         ]
         
 
@@ -50,7 +50,7 @@ class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Accommodation
         fields = [
-            "name",
+            "id","name",
         ]
 
 # ACCOMMODATION LIST VIEW SERIALIZER
