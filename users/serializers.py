@@ -61,7 +61,7 @@ class AgentProfileSerializer(serializers.ModelSerializer):
     bank_details = BankDetailsSerializer()
     class Meta:
         model = HouseAgent
-        fields = ["id", "user","bank_details","office","image" ]
+        fields = ["id", "user","bank_details","office","image_url" ]
 
 class AgentCreateSerializer(serializers.ModelSerializer):
     bank_details = BankDetailsSerializer()

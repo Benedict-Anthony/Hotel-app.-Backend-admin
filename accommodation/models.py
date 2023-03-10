@@ -32,7 +32,7 @@ class Images(models.Model):
         
     def image_url(self):
         try:
-            return f'http://127.0.0.1:8000{self.image.url}'
+            return f'https://hostelapi.onrender.com{self.image.url}'
         except:
             return ""
     
@@ -40,7 +40,7 @@ class Images(models.Model):
        if self.image:
            self.thumbnail = self.make_thumbnail(image=self.image)
            self.save()
-           return f'http://127.0.0.1:8000{self.thumbnail.url}'
+           return f'https://hostelapi.onrender.com{self.thumbnail.url}'
        return ""
            
     def make_thumbnail(self, image):
@@ -98,7 +98,7 @@ class Accommodation(models.Model):
     
     def banner_url(self):
         try:
-            return f'http://127.0.0.1:8000{self.banner.url}'
+            return f'https://hostelapi.onrender.com{self.banner.url}'
         except:
             return ""
  

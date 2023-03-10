@@ -80,5 +80,10 @@ class HouseAgent(models.Model):
             return f"{self.user.first_name} {self.user.last_name}"
         except:
              return f"{self.NIN}"
-        
+    
+    def image_url(self):
+        try:
+            return f"https://hostelapi.onrender.com{self.image.url}"
+        except:
+            return ""
         
